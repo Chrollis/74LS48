@@ -207,7 +207,7 @@ public:
 	f = o_ab.OR(o_n_cd);//f = A + B + C' + D
 	g = o_o_ano_bda_cna_bd.OR(a_dx_bc);//g = A + (B+D)' + C(BD)' + D(B^C)
 
-	//total 33
+	//total 32
 	}
 };
 
