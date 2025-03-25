@@ -42,7 +42,7 @@ void C74LS48::decode(bool A, bool B, bool C, bool D) {
 	bool& f = output[5];
 	bool& g = output[6];
 	
-	//8421BCD code
+	//8421BCD code, when active high
 	bool NOT_A = !A;
 	bool NOT_B = !B;
 	bool NOT_C = !C;
@@ -75,4 +75,7 @@ void C74LS48::decode(bool A, bool B, bool C, bool D) {
 	c = !(A_NOR_B && C_AND_NOT_D);
 	d = A_OR_NOT_D_AND_C_OR_NOT_B || D_AND_B_XOR_C;
 	//total 26 gates
+
+	//8421BCD code, when active low
+	
 }
