@@ -43,6 +43,7 @@ void C74LS48::decode(bool A, bool B, bool C, bool D) {
 	bool& g = output[6];
 	
 	//8421BCD code, when active high
+	/*
 	bool NOT_A = !A;
 	bool NOT_B = !B;
 	bool NOT_C = !C;
@@ -74,8 +75,49 @@ void C74LS48::decode(bool A, bool B, bool C, bool D) {
 	g = A_OR_C_AND_NOT_D || B_XOR_C;
 	c = !(A_NOR_B && C_AND_NOT_D);
 	d = A_OR_NOT_D_AND_C_OR_NOT_B || D_AND_B_XOR_C;
+	*/
 	//total 26 gates
 
 	//8421BCD code, when active low
-	
+	bool NOT_A = !A;
+	bool NOT_B = !B;
+
+	bool A_NOR_C = !(A || C);
+	bool B_XOR_D = B != D;
+	bool C_XOR_D = C != D;
+	bool B_NOR_D = !(B || D);
+	bool C_XNOR_D = C == D;
+	bool A_NOR_B = !(A || B);
+	bool B_NOR_C = !(B || C);
+	bool B_AND_C = B && C;
+
+	bool D_AND_NOT_B = D && NOT_B;
+	bool C_NOR_NOT_B = !(C || NOT_B);
+	bool D_OR_NOT_B = D || NOT_B;
+
+	a = A_NOR_C && B_XOR_D;
+	b = B && C_XOR_D;
+	c = C && B_NOR_D;
+	e = D || C_NOR_NOT_B;
+
+	bool B_AND_C_XNOR_D = B && C_XNOR_D;
+	bool C_AND_D_OR_NOT_B = C && D_OR_NOT_B;
+	bool D_AND_A_NOR_B = D && A_NOR_B;
+	bool D_AND_B_AND_C = D && B_AND_C;
+
+	bool A_NOR_C_AND_D_AND_NOT_B = A_NOR_C && D_AND_NOT_B;
+	bool B_NOR_C_OR_D_AND_B_AND_C = B_NOR_C || D_AND_B_AND_C;
+
+	d = A_NOR_C_AND_D_AND_NOT_B || B_AND_C_XNOR_D;
+	f = C_AND_D_OR_NOT_B || D_AND_A_NOR_B;
+	g = NOT_A && B_NOR_C_OR_D_AND_B_AND_C;
+	//total 26 gates
+	//simulate active low
+	a = !a;
+	b = !b;
+	c = !c;
+	d = !d;
+	e = !e;
+	f = !f;
+	g = !g;
 }
